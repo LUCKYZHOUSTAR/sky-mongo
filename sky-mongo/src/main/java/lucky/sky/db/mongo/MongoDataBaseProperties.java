@@ -16,9 +16,9 @@ import org.springframework.util.StringValueResolver;
  */
 @Configuration
 @EnableConfigurationProperties
-public class SpringContextUtil implements ApplicationContextAware, EmbeddedValueResolverAware {
+public class MongoDataBaseProperties implements ApplicationContextAware, EmbeddedValueResolverAware {
 
-    private static Logger logger = LoggerFactory.getLogger(SpringContextUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(MongoDataBaseProperties.class);
 
 
     // Spring应用上下文环境
@@ -33,7 +33,7 @@ public class SpringContextUtil implements ApplicationContextAware, EmbeddedValue
      */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
-        SpringContextUtil.applicationContext = applicationContext;
+        MongoDataBaseProperties.applicationContext = applicationContext;
     }
 
     /**
@@ -53,7 +53,7 @@ public class SpringContextUtil implements ApplicationContextAware, EmbeddedValue
     public static String getPropertiesValue(String name) {
         try {
             name = "${" + name + "}";
-            return SpringContextUtil.stringValueResolver.resolveStringValue(name);
+            return MongoDataBaseProperties.stringValueResolver.resolveStringValue(name);
         } catch (Exception e) {
             logger.error(String.format("当前环境变量中没有{%s}的配置", name));
             // 获取失败则返回null
@@ -63,7 +63,7 @@ public class SpringContextUtil implements ApplicationContextAware, EmbeddedValue
 
     @Override
     public void setEmbeddedValueResolver(StringValueResolver stringValueResolver) {
-        SpringContextUtil.stringValueResolver = stringValueResolver;
+        MongoDataBaseProperties.stringValueResolver = stringValueResolver;
     }
 
 }

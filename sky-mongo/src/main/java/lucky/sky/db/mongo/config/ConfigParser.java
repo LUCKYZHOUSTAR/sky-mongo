@@ -1,6 +1,6 @@
 package lucky.sky.db.mongo.config;
 
-import lucky.sky.db.mongo.SpringContextUtil;
+import lucky.sky.db.mongo.MongoDataBaseProperties;
 import lucky.sky.db.mongo.lang.StrKit;
 import org.w3c.dom.Document;
 
@@ -66,7 +66,7 @@ public class ConfigParser {
 
         String resolvedSource = source;
         for (String p : props) {
-            String v = SpringContextUtil.getPropertiesValue(p);
+            String v = MongoDataBaseProperties.getPropertiesValue(p);
             if (v != null) {
                 String placeHolder = String.format("${%s}", p);
                 resolvedSource = resolvedSource.replace(placeHolder, v);
