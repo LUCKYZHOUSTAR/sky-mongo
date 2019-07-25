@@ -2,6 +2,11 @@ package lucky.sky.db.mongo;
 
 import lombok.Getter;
 import lombok.Setter;
+import lucky.sky.db.mongo.config.ConfigManager;
+import lucky.sky.db.mongo.config.ConfigParser;
+import lucky.sky.db.mongo.config.XmlHelper;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,27 +26,27 @@ public final class MongoConfig {
     }
 
     private static void loadConfig() {
-//        String filePath = ConfigManager.findConfigPath("db.mongo", ".conf", ".xml");
-//        if (filePath == null) {
-//            return;
-//        }
-//
-//        Document doc = ConfigParser.resolveXml(filePath);
-//        NodeList nodes = doc.getElementsByTagName("database");
-//        for (int i = 0; i < nodes.getLength(); i++) {
-//            Element elem = (Element) nodes.item(i);
-//
-//            MongoInfoImp info = new MongoInfoImp();
-//            NodeList settingNodes = elem.getElementsByTagName("setting");
-//            info.settings = XmlHelper.toSettingMap(settingNodes, "name", "value");
-//            info.name = elem.getAttribute("name");
-//            info.url = info.settings.getString("ConnString");
-//            if (!info.url.startsWith("mongodb://")) {
-//                info.url = "mongodb://" + info.url;
-//            }
-//
-//            infos.put(info.name, info);
-//        }
+        String filePath = ConfigManager.findConfigPath("db.mongo", ".conf", ".xml");
+        if (filePath == null) {
+            return;
+        }
+
+        Document doc = ConfigParser.resolveXml(filePath);
+        NodeList nodes = doc.getElementsByTagName("database");
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Element elem = (Element) nodes.item(i);
+
+            MongoInfoImp info = new MongoInfoImp();
+            NodeList settingNodes = elem.getElementsByTagName("setting");
+            info.settings = XmlHelper.toSettingMap(settingNodes, "name", "value");
+            info.name = elem.getAttribute("name");
+            info.url = info.settings.getString("ConnString");
+            if (!info.url.startsWith("mongodb://")) {
+                info.url = "mongodb://" + info.url;
+            }
+
+            infos.put(info.name, info);
+        }
     }
 
     public synchronized static MongoInfo get(String name) {

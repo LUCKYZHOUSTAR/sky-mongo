@@ -65,6 +65,14 @@ public class Exceptions {
 
 
     /**
+     * 将 Exception 包装为 UncheckedException
+     */
+    public static UncheckedException asUnchecked(Throwable ex) {
+        return new UncheckedException(ex);
+    }
+
+
+    /**
      * 返回指定异常的堆栈信息。
      */
     public static String getStackTrace(Throwable e) {
