@@ -2,6 +2,7 @@ package lucky.sky.db.mongo.config;
 
 import com.google.common.base.Strings;
 import lucky.sky.db.mongo.lang.Exceptions;
+import lucky.sky.db.mongo.lang.SettingMap;
 import lucky.sky.db.mongo.lang.UncheckedException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -87,5 +88,20 @@ public final class XmlHelper {
             return defaultValue;
         }
         return val;
+    }
+
+    public static SettingMap toSettingMap(NodeList nodes, String keyAttr, String valueAttr) {
+        SettingMap settings = new SettingMap();
+        for (int i = 0; i < nodes.getLength(); i++) {
+            if (nodes.item(i).getNodeType() != Node.ELEMENT_NODE) {
+                continue;
+            }
+
+            org.w3c.dom.Element elem = (org.w3c.dom.Element) nodes.item(i);
+            String key = elem.getAttribute(keyAttr);
+            String value = elem.getAttribute(valueAttr);
+            settings.put(key, value);
+        }
+        return settings;
     }
 }

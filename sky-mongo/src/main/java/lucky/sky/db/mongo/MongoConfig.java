@@ -5,7 +5,9 @@ import lombok.Setter;
 import lucky.sky.db.mongo.config.ConfigManager;
 import lucky.sky.db.mongo.config.ConfigParser;
 import lucky.sky.db.mongo.config.XmlHelper;
+import lucky.sky.db.mongo.lang.SettingMap;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import java.util.HashMap;
@@ -73,6 +75,8 @@ public final class MongoConfig {
         private String url;
         private String version;
         private Map<String, String> options;
+        private SettingMap settings;
+
     }
 
 }
