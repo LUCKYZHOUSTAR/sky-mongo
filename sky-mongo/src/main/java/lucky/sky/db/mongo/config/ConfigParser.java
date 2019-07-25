@@ -1,5 +1,6 @@
 package lucky.sky.db.mongo.config;
 
+import lucky.sky.db.mongo.SpringContextUtil;
 import lucky.sky.db.mongo.lang.StrKit;
 import org.w3c.dom.Document;
 
@@ -8,6 +9,10 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class ConfigParser {
@@ -36,6 +41,9 @@ public class ConfigParser {
                 if (line == null) {
                     break;
                 }
+
+                //动态属性替换
+                line = resolvePropertiesCore(line);
                 sb.append(line);
                 sb.append(StrKit.newLine);
             }
@@ -44,6 +52,27 @@ public class ConfigParser {
         }
 
         return sb.toString();
+    }
+
+
+    private static String resolvePropertiesCore(String source) {
+        Pattern pattern = Pattern.compile("\\$\\{(?<prop>[^\\s\\{\\}]+)\\}");
+        Matcher matcher = pattern.matcher(source);
+        List<String> props = new ArrayList<>();
+        while (matcher.find()) {
+            String prop = matcher.group("prop");
+            props.add(prop);
+        }
+
+        String resolvedSource = source;
+        for (String p : props) {
+            String v = SpringContextUtil.getPropertiesValue(p);
+            if (v != null) {
+                String placeHolder = String.format("${%s}", p);
+                resolvedSource = resolvedSource.replace(placeHolder, v);
+            }
+        }
+        return resolvedSource;
     }
 
 
