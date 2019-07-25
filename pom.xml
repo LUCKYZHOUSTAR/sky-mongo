@@ -6,6 +6,9 @@
     <groupId>lucky.sky</groupId>
     <artifactId>sky-parent</artifactId>
     <version>1.0.18-SNAPSHOT</version>
+    <modules>
+        <module>sky-mongo</module>
+    </modules>
     <packaging>pom</packaging>
 
     <properties>
@@ -14,6 +17,9 @@
         <version.slf4j>1.7.21</version.slf4j>
         <version.jdk>10</version.jdk>
         <version.guava>19.0</version.guava>
+        <version.mongodb>3.10.2</version.mongodb>
+        <version.mongodb.morphia>1.1.1</version.mongodb.morphia>
+        <version.lombok>1.16.8</version.lombok>
     </properties>
 
     <dependencyManagement>
@@ -36,6 +42,22 @@
             </dependency>
 
 
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${version.lombok}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
