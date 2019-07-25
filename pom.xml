@@ -19,7 +19,7 @@
         <version.guava>19.0</version.guava>
         <version.mongodb>3.10.2</version.mongodb>
         <version.mongodb.morphia>1.1.1</version.mongodb.morphia>
-        <version.lombok>1.16.8</version.lombok>
+        <version.lombok>1.18.0</version.lombok>
     </properties>
 
     <dependencyManagement>
