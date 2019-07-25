@@ -52,6 +52,9 @@ public final class MongoConfig {
     }
 
     public synchronized static MongoInfo get(String name) {
+        if (infos.isEmpty()) {
+            loadConfig();
+        }
         MongoInfo info = infos.get(name);
         return info;
     }
