@@ -157,11 +157,6 @@ public class ObjectCodec<T> implements CollectibleCodec<T> {
         if (bsonType == BsonType.ARRAY) {
             return readList(reader, decoderContext, clazz);
         }
-//		boolean b = (bsonType == BsonType.BOOLEAN
-//				|| bsonType == BsonType.STRING
-//				|| bsonType == BsonType.DATE_TIME
-//				|| bsonType == BsonType.DOUBLE || bsonType == BsonType.INT32 || bsonType == BsonType.INT64);
-//			if (null != clazz && !b) {
         if (null != clazz) {
             return registry.get(clazz).decode(reader, decoderContext);
         }

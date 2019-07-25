@@ -178,6 +178,7 @@ public class Mgo {
         return db;
     }
 
+    //TODO:暂时不提供分片管理
     public static Datastore getShardDb(String shardClusterName, DbAccessMode mode, Object... keys) {
 //        ShardConfig.Node node = ShardConfig.getDefault().getNode(shardClusterName, keys);
 //        String dbCfgName = mode == DbAccessMode.READ ? node.getRead() : node.getWrite();
