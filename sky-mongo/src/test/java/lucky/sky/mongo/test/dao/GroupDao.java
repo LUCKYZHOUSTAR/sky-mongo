@@ -1,15 +1,9 @@
 package lucky.sky.mongo.test.dao;
 
 import lucky.sky.db.mongo.MgoDao;
-import lucky.sky.db.mongo.data.PageInfo;
 import lucky.sky.mongo.test.model.Group;
-import lucky.sky.mongo.test.model.User;
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.UpdateOperations;
 import org.mongodb.morphia.query.UpdateResults;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @Auther: chaoqiang.zhou
@@ -31,13 +25,17 @@ public class GroupDao extends MgoDao<Group, Integer> {
     }
 
 
-
-    public Group getGroup(Integer id){
+    public Group getGroup(Integer id) {
 
         return get(id);
     }
 
 
+    public void UpdateGroup(Integer id) {
+        UpdateOperations updateOperations = createUpdateOperations().set("pwd", "sdf");
+
+        UpdateResults updateResults = updateById(id, updateOperations);
+    }
 
 
 }
